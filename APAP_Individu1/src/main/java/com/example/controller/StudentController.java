@@ -72,6 +72,8 @@ public class StudentController
     @RequestMapping(value = "/mahasiswa/tambah")
     public String tambahMahasiswa (Model model)
     {
+		List<ProdiModel> prodi = prodiDAO.selectAllProdi();
+        model.addAttribute ("prodi", prodi);
         model.addAttribute ("title", "Tambah Mahasiswa");
         return "form-add";
     }
@@ -112,6 +114,8 @@ public class StudentController
         StudentModel mahasiswa = studentDAO.selectMahasiswa (npm);
 
         if (mahasiswa != null) {
+    		List<ProdiModel> prodi = prodiDAO.selectAllProdi();
+            model.addAttribute ("prodi", prodi);
             model.addAttribute ("title", "Update Mahasiswa");
             model.addAttribute ("mahasiswa", mahasiswa);
             return "form-update";

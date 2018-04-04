@@ -27,7 +27,7 @@
 								<th>Universitas</th><td th:text="${mahasiswa.nama_univ}"></td>
 							</tr>
 							<tr>
-								<th>Jenis Kelamin</th><td th:text="${mahasiswa.jenis_kelamin==0} ? 'Laki-Laki' : 'Perempuan' "></td>
+								<th>Jenis Kelamin</th><td th:text="${mahasiswa.jenis_kelamin=='0'} ? 'Laki-Laki' : 'Perempuan' "></td>
 							</tr>
 							<tr>
 								<th>Agama</th><td th:text="${mahasiswa.agama}"></td>

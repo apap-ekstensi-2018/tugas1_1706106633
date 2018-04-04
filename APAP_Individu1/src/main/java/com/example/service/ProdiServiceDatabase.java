@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dao.ProdiMapper;
+import com.example.model.FakultasModel;
 import com.example.model.ProdiModel;
 import com.example.model.ProdiModel;
 
@@ -32,4 +33,13 @@ public class ProdiServiceDatabase implements ProdiService
         log.info ("select all students");
         return prodiMapper.selectProdi (id_fakultas);
     }
+
+
+    @Override
+    public List<ProdiModel> selectAllProdi ()
+    {
+        log.info ("select all prodi");
+        return prodiMapper.selectAllProdi ();
+    }
+
 }

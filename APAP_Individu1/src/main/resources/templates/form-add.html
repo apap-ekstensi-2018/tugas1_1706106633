@@ -18,21 +18,21 @@
 				<form th:object="${mahasiswa}" action="/mahasiswa/tambah" method="POST">
 					<div class="form-group">
 						<label for="nama">Name</label> 
-						<input class="form-control" type="text" name="nama" />
+						<input class="form-control" type="text" name="nama" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="tempat_lahir">Tempat Lahir</label> 
-						<input class="form-control" type="text" name="tempat_lahir" />
+						<input class="form-control" type="text" name="tempat_lahir" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="tanggal_lahir">Tanggal Lahir</label> 
-						<input class="form-control" type="date" name="tanggal_lahir" />
+						<input class="form-control" type="date" name="tanggal_lahir" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="jenis_kelamin">Jenis Kelamin</label> 
 						<div class="radio">
 						    <label class="radio-inline">
-						      <input type="radio" value="0" name="jenis_kelamin" />Laki-laki
+						      <input type="radio" value="0" name="jenis_kelamin" checked="checked"/>Laki-laki
 						    </label>
 						    <label class="radio-inline">
 						      <input type="radio" value="1" name="jenis_kelamin" />Perempuan
@@ -61,7 +61,7 @@
 					</div>	
 					<div class="form-group">
 						<label for="nama">Tahun Masuk</label> 
-						<input class="form-control" type="text" name="tahun_masuk" />
+						<input class="form-control" type="text" name="tahun_masuk" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="agama">Jalur Masuk</label>
@@ -74,9 +74,11 @@
 						</select>
 					</div>	
 					<div class="form-group">
-						<label for="nama">Id Program Studi</label> 
-						<input class="form-control" type="text" name="id_prodi" />
-					</div>
+						<label for="prodi">Prodi</label>
+						<select class="form-control" name="id_prodi">
+							<option th:each="prodi : ${prodi}" th:value="${prodi.id}" th:text="${prodi.nama_prodi}"/>
+						</select>
+					</div>	
 
 
 					<div class="form-group">

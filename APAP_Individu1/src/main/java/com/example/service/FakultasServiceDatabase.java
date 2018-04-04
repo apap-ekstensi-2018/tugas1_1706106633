@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.FakultasMapper;
 import com.example.model.FakultasModel;
+import com.example.model.UniversitasModel;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,4 +24,5 @@ public class FakultasServiceDatabase implements FakultasService
         log.info ("select all students");
         return fakultasMapper.selectFakultas (id_univ);
     }
+    
 }

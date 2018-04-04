@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.example.model.FakultasModel;
 import com.example.model.ProdiModel;
+import com.example.model.UniversitasModel;
 
 @Mapper
 public interface ProdiMapper
@@ -20,6 +21,10 @@ public interface ProdiMapper
 
     @Select("SELECT * FROM program_studi WHERE id_fakultas=#{id_fakultas}")
     List<ProdiModel> selectProdi (@Param("id_fakultas") String id_fakultas);
+
+    @Select("SELECT * FROM program_studi")
+    List<ProdiModel> selectAllProdi ();
+
 }
 
 

@@ -18,65 +18,67 @@
 				<form th:object="${mahasiswa}" th:action="'/mahasiswa/ubah/' + ${mahasiswa.npm}" method="POST">
 					<div class="form-group">
 						<label for="nama">Name</label> 
-						<input class="form-control" type="text" name="nama" th:value="${mahasiswa.nama}"/>
+						<input class="form-control" type="text" name="nama" th:value="${mahasiswa.nama}" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="tempat_lahir">Tempat Lahir</label> 
-						<input class="form-control" type="text" name="tempat_lahir" th:value="${mahasiswa.tempat_lahir}"/>
+						<input class="form-control" type="text" name="tempat_lahir" th:value="${mahasiswa.tempat_lahir}" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="tanggal_lahir">Tanggal Lahir</label> 
-						<input class="form-control" type="date" name="tanggal_lahir" th:value="${mahasiswa.tanggal_lahir}"/>
+						<input class="form-control" type="date" name="tanggal_lahir" th:value="${mahasiswa.tanggal_lahir}" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="jenis_kelamin">Jenis Kelamin</label> 
 						<div class="radio">
 						    <label class="radio-inline">
-						      <input type="radio" value="0" name="jenis_kelamin" />Laki-laki
+						      <input type="radio" value="0" name="jenis_kelamin" th:checked="${mahasiswa.jenis_kelamin=='0'} ? 'checked' : 'false'"/>Laki-laki
 						    </label>
 						    <label class="radio-inline">
-						      <input type="radio" value="1" name="jenis_kelamin" />Perempuan
+						      <input type="radio" value="1" name="jenis_kelamin" th:checked="${mahasiswa.jenis_kelamin=='1'} ? 'checked' : 'false'"/>Perempuan
 						    </label>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="agama">Agama</label>
 						<select class="form-control" name="agama">
-							<option value="Islam">Islam</option>
-							<option value="Katolik">Katolik</option>
-							<option value="Protestan">Protestan</option>
-							<option value="Hindu">Hindu</option>
-							<option value="Budha">Budha</option>
-							<option value="Konghucu">Konghucu</option>
+							<option value="Islam" th:selected="${mahasiswa.agama=='Islam'} ? 'true' : 'false'">Islam</option>
+							<option value="Katolik" th:selected="${mahasiswa.agama=='Katolik'} ? 'true' : 'false'">Katolik</option>
+							<option value="Protestan" th:selected="${mahasiswa.agama=='Protestan'} ? 'true' : 'false'">Protestan</option>
+							<option value="Hindu" th:selected="${mahasiswa.agama=='Hindu'} ? 'true' : 'false'">Hindu</option>
+							<option value="Budha" th:selected="${mahasiswa.agama=='Budha'} ? 'true' : 'false'">Budha</option>
+							<option value="Konghucu" th:selected="${mahasiswa.agama=='Konghucu'} ? 'true' : 'false'">Konghucu</option>
 						</select>
 					</div>	
 					<div class="form-group">
 						<label for="golongan darah">Golongan Darah</label>
 						<select class="form-control" name="golongan_darah">
-							<option value="A">A</option>
-							<option value="B">B</option>
-							<option value="AB">AB</option>
-							<option value="O">O</option>
+							<option value="A" th:selected="${mahasiswa.golongan_darah=='A'} ? 'true' : 'false'">A</option>
+							<option value="B" th:selected="${mahasiswa.golongan_darah=='B'} ? 'true' : 'false'">B</option>
+							<option value="AB" th:selected="${mahasiswa.golongan_darah=='AB'} ? 'true' : 'false'">AB</option>
+							<option value="O" th:selected="${mahasiswa.golongan_darah=='O'} ? 'true' : 'false'">O</option>
 						</select>
 					</div>	
 					<div class="form-group">
 						<label for="nama">Tahun Masuk</label> 
-						<input class="form-control" type="text" name="tahun_masuk" th:value="${mahasiswa.tahun_masuk}"/>
+						<input class="form-control" type="text" name="tahun_masuk" th:value="${mahasiswa.tahun_masuk}" required="true"/>
 					</div>
 					<div class="form-group">
 						<label for="agama">Jalur Masuk</label>
 						<select class="form-control" name="jalur_masuk" th:value="${mahasiswa.jalur_masuk}">
-							<option value="53,Undangan Olimpiade">Undangan Olimpiade</option>
-							<option value="54,Undangan Reguler / SNMPTN">Undangan Reguler / SNMPTN</option>
-							<option value="55,Undangan Paralel / PPKB">Undangan Paralel / PPKB</option>
-							<option value="57,Ujian Tulis Bersama / SBMPTN">Ujian Tulis Bersama / SBMPTN</option>
-							<option value="62,Ujian Tulis Mandiri">Ujian Tulis Mandiri</option>
+							<option value="54,Undangan Reguler / SNMPTN" th:selected="${mahasiswa.jalur_masuk.equals('Undangan Reguler / SNMPTN')} ? 'true' : 'false'">Undangan Reguler / SNMPTN</option>
+							<option value="55,Undangan Paralel / PPKB" th:selected="${mahasiswa.jalur_masuk.equals('Undangan Paralel / PPKB')} ? 'true' : 'false'">Undangan Paralel / PPKB</option>
+							<option value="57,Ujian Tulis Bersama / SBMPTN" th:selected="${mahasiswa.jalur_masuk.equals('Ujian Tulis Bersama / SBMPTN')} ? 'true' : 'false'">Ujian Tulis Bersama / SBMPTN</option>
+							<option value="53,Undangan Olimpiade" th:selected="${mahasiswa.jalur_masuk.equals('Undangan Olimpiade')} ? 'true' : 'false'">Undangan Olimpiade</option>
+							<option value="62,Ujian Tulis Mandiri" th:selected="${mahasiswa.jalur_masuk.equals('Ujian Tulis Mandiri')} ? 'true' : 'false'">Ujian Tulis Mandiri</option>
 						</select>
 					</div>	
 					<div class="form-group">
-						<label for="nama">Id Program Studi</label> 
-						<input class="form-control" type="text" name="id_prodi" th:value="${mahasiswa.id_prodi}"/>
-					</div>
+						<label for="prodi">Prodi</label>
+						<select class="form-control" name="id_prodi">
+							<option th:each="prodi : ${prodi}" th:value="${prodi.id}" th:text="${prodi.nama_prodi}" th:selected="${prodi.id} == ${mahasiswa.id_prodi}"/>
+						</select>
+					</div>	
 
 					<input class="form-control" type="hidden" name="id" th:value="${mahasiswa.id}"/>
 
