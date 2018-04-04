@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.ProdiMapper;
 import com.example.model.ProdiModel;
+import com.example.model.ProdiModel;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,5 +26,10 @@ public class ProdiServiceDatabase implements ProdiService
         return prodiMapper.kelulusanProdi (tahun_masuk, id_prodi);
     }
 
-    
+    @Override
+    public List<ProdiModel> selectProdi (String id_fakultas)
+    {
+        log.info ("select all students");
+        return prodiMapper.selectProdi (id_fakultas);
+    }
 }

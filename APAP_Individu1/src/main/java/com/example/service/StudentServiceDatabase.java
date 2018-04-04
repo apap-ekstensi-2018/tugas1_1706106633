@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dao.StudentMapper;
 import com.example.model.StudentModel;
+import com.example.model.StudentModel;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,39 +26,6 @@ public class StudentServiceDatabase implements StudentService
         return studentMapper.selectMahasiswa (npm);
     }
 
-
-    @Override
-    public List<StudentModel> selectAllStudents ()
-    {
-        log.info ("select all students");
-        return studentMapper.selectAllStudents ();
-    }
-
-
-    @Override
-    public void addStudent (StudentModel student)
-    {
-        studentMapper.addStudent (student);
-    }
-
-
-    @Override
-    public void deleteStudent (String npm)
-    {
-        log.info ("student " + npm + " deleted");
-        studentMapper.deleteStudent(npm);
-    }
-
-    @Override
-    public void updateStudent (StudentModel student)
-    {
-        log.info ("student updated");
-        studentMapper.updateStudent (student);
-    }
-
-    
-    
-    
     @Override
     public void tambahMahasiswa (StudentModel mahasiswa)
     {
@@ -89,5 +57,10 @@ public class StudentServiceDatabase implements StudentService
         studentMapper.updateMahasiswa (mahasiswa);
     }
 
-    
+    @Override
+    public List<StudentModel> selectListMahasiswa (String id_prodi)
+    {
+        log.info ("select all students by id_prodi");
+        return studentMapper.selectListMahasiswa (id_prodi);
+    }
 }

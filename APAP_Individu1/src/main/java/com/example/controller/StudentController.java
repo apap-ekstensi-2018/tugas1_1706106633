@@ -19,6 +19,7 @@ import com.example.model.UniversitasModel;
 import com.example.service.UniversitasService;
 
 import com.example.model.FakultasModel;
+import com.example.service.FakultasService;
 
 import com.example.model.StudentModel;
 import com.example.service.StudentService;
@@ -38,146 +39,10 @@ public class StudentController
     ProdiService prodiDAO;
 
     @Autowired
+    FakultasService fakultasDAO;
+    
+    @Autowired
     StudentService studentDAO;
-    
-    @RequestMapping("/mahasiswa/tambah/submit")
-    public String tambahMahasiswa_aksi (
-    		Model model,
-            @RequestParam(value = "npm", required = false) String npm,
-            @RequestParam(value = "name", required = false) String name,
-            @RequestParam(value = "gpa", required = false) double gpa)
-    {
-        model.addAttribute ("title", "Sukses Tambah");
-        StudentModel student = new StudentModel ();
-        studentDAO.addStudent (student);
-
-        return "success-add";
-    }
-
-
-//    @RequestMapping("/student/view")
-//    public String view (Model model,
-//            @RequestParam(value = "npm", required = false) String npm)
-//    {
-//        StudentModel student = studentDAO.selectMahasiswa (npm);
-//
-//        if (student != null) {
-//            model.addAttribute ("title", "Tampil Mahasiswa");
-//            model.addAttribute ("student", student);
-//            return "view";
-//        } else {
-//            model.addAttribute ("title", "Gagal Tampil Mahasiswa");
-//            model.addAttribute ("npm", npm);
-//            return "not-found";
-//        }
-//    }
-
-
-//    @RequestMapping("/student/view/{npm}")
-//    public String viewPath (Model model,
-//            @PathVariable(value = "npm") String npm)
-//    {
-//        StudentModel student = studentDAO.selectStudent (npm);
-//
-//        if (student != null) {
-//            model.addAttribute ("student", student);
-//            model.addAttribute ("title", "Tampil Mahasiswa");
-//            return "view";
-//        } else {
-//            model.addAttribute ("title", "Gagal Tampil Mahasiswa");
-//            model.addAttribute ("npm", npm);
-//            return "not-found";
-//        }
-//    }
-
-
-    @RequestMapping("/student/viewall")
-    public String view (Model model)
-    {
-        List<StudentModel> students = studentDAO.selectAllStudents ();
-        model.addAttribute ("students", students);
-        model.addAttribute ("title", "Tampil Semua Data");
-
-        return "viewall";
-    }
-
-
-    @RequestMapping("/student/delete/{npm}")
-    public String delete (Model model, @PathVariable(value = "npm") String npm)
-    {
-
-        StudentModel student = studentDAO.selectMahasiswa (npm);
-
-        if (student != null) {
-            model.addAttribute ("title", "Hapus Mahasiswa");
-            studentDAO.deleteStudent (npm);
-            return "delete";
-        } else {
-            model.addAttribute ("title", "Hapus Mahasiswa");
-            model.addAttribute ("npm", npm);
-            return "not-found";
-        }
-    }
-
-    
-    @RequestMapping("/student/update/{npm}")
-    public String update (Model model, @PathVariable(value = "npm") String npm)
-    {
-
-        StudentModel student = studentDAO.selectMahasiswa (npm);
-
-        if (student != null) {
-            model.addAttribute ("title", "Update Mahasiswa");
-            model.addAttribute ("student", student);
-            return "form-update";
-        } else {
-            model.addAttribute ("title", "Update Mahasiswa");
-            model.addAttribute ("npm", npm);
-            return "not-found";
-        }
-    }
-    
-    @RequestMapping(value = "/student/update/submit", method =  RequestMethod.POST)
-    public String updateSubmit(Model model, @ModelAttribute StudentModel student, BindingResult bindingResult){
-    	
-    	if(bindingResult.hasErrors())
-    		return "errorForm";
-    		
-        studentDAO.updateStudent (student);
-
-        model.addAttribute ("title", "Update Mahasiswa");
-        return "success-update";
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     @RequestMapping("/")
@@ -334,18 +199,37 @@ public class StudentController
     		@RequestParam(value = "prodi", required = false) String id_prodi    	
     ){
     	if(id_universitas == null){
-    		List<UniversitasModel> univ = universitasDAO.selectUniversitas();
-    		model.addAttribute("universitas", univ);
+    		List<UniversitasModel> universitas = universitasDAO.selectUniversitas();
+    		model.addAttribute("universitas", universitas);
     		return "cari-mahasiswa";
     	}else if(id_fakultas == null){
+    		List<UniversitasModel> universitas = universitasDAO.selectUniversitas();
+    		List<FakultasModel> fakultas = fakultasDAO.selectFakultas(id_universitas);
+
+    		model.addAttribute("universitas", universitas);
+    		model.addAttribute("fakultas", fakultas);
+    		return "cari-mahasiswa";
     	
     	}else if(id_prodi == null){
+    		List<UniversitasModel> universitas = universitasDAO.selectUniversitas();
+    		List<FakultasModel> fakultas = fakultasDAO.selectFakultas(id_universitas);
+    		List<ProdiModel> prodi = prodiDAO.selectProdi(id_fakultas);
+
+    		model.addAttribute("universitas", universitas);
+    		model.addAttribute("fakultas", fakultas);
+    		model.addAttribute("prodi", prodi);
+    		return "cari-mahasiswa";
     		
     	}else{
-    		
+			List<StudentModel> mahasiswa = studentDAO.selectListMahasiswa(id_prodi);
+			model.addAttribute("dataMahasiswa",mahasiswa);
+			if(mahasiswa!=null) {
+				model.addAttribute("prodi",mahasiswa.get(0).getNama_prodi());
+				model.addAttribute("fakultas",mahasiswa.get(0).getNama_fakultas());
+				model.addAttribute("universitas",mahasiswa.get(0).getNama_univ());
+			}
+			return "daftar-mahasiswa";    		
     	}
-    	
-    	return "cariMahasiswa";
     }
     
     

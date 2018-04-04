@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <body>
+		<div th:replace="fragments/fragment :: header"></div>
+
+		<div class = "container">
+		<br/>
+		<p th:text="'List Data Mahasiswa Program Studi ' +${prodi}+ ' Fakultas ' +${fakultas}+ ' ' +${universitas}"></p>
+	    <div class="table-responsive">
+	        <table class="table table-bordered table-striped" id="myTable">
+	            <thead>
+	                <tr>
+	                    <th width="80px">No</th>
+	                    <th>NPM</th>
+	                    <th>Nama</th>
+	                    <th>Program Studi</th>
+	                    <th>Tahun Masuk</th>
+	                    <th>Jalur Masuk</th>
+	                    <th>Detail Mahasiswa</th>
+	                </tr>
+	            </thead>	        	
+	            <tbody>
+			    	<tr th:each="student,iterationStatus: ${dataMahasiswa}">
+			               <td th:text="${iterationStatus.count}"></td>
+			               <td th:text="${student.npm}"></td>
+			               <td th:text="${student.nama}"></td>
+			               <td th:text="${student.nama_prodi}"></td>
+			               <td th:text="${student.tahun_masuk}"></td>
+			               <td th:text="${student.jalur_masuk}"></td>
+			               <td>
+			               <center>
+							<form action="/mahasiswa" method="get">
+								<div class="form-group">
+									<input class="form-control" type="hidden" name="npm" th:value="${student.npm}"/>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Detail</button>
+								</div>
+							</form>
+							</center>
+			               </td>
+					</tr>
+	            </tbody>
+	        </table>
+        </div>
+        </div>
+
+
+		<div th:replace="fragments/fragment :: footer"></div>
+
+    </body>
+</html>
